@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Development Life Cycle (SDLC)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.95);
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            color: #333;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .concept-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+            color: #333;
+        }
+
+        .concept-box p {
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .concept-box strong {
+            color: #333;
+        }
+
+        .analogy-box {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #17a2b8;
+            color: #333;
+        }
+
+        .analogy-box strong {
+            color: #333;
+        }
+
+        .phase-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid #28a745;
+            color: #333;
+        }
+
+        .phase-card h3 {
+            color: #28a745;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .phase-card h4 {
+            color: #495057;
+            margin: 15px 0 10px 0;
+        }
+
+        .quality-attribute {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #dc3545;
+            color: #333;
+        }
+
+        .quality-attribute h3 {
+            color: #dc3545;
+            margin-bottom: 10px;
+        }
+
+        .case-study {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #ffc107;
+            color: #333;
+        }
+
+        .case-study h3 {
+            color: #ffc107;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .method-card {
+            background: #f1f3f4;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .method-card h4 {
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .reflection-question {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+            color: #333;
+        }
+
+        .reflection-question strong {
+            color: #333;
+        }
+
+        .quiz-container {
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            color: #333;
+        }
+
+        .quiz-container h2 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+            color: #333;
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        .question h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            margin: 15px 0;
+        }
+
+        .options label {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            background: #e9ecef;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #333;
+            transition: background-color 0.2s;
+        }
+
+        .options label:hover {
+            background: #dee2e6;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px 5px;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-progress {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .quiz-progress-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-stats {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .result {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            color: #333;
+        }
+
+        .correct {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+        }
+
+        .incorrect {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+        }
+
+        .quiz-results {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            color: #333;
+            display: none;
+        }
+
+        .quiz-results.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Software Development Life Cycle (SDLC) ⚡</h1>
+            <p>Master the structured approach to building quality software systems!</p>
+        </div>
+
+        <div class="section">
+            <h2>* Introduction: The Software Crisis</h2>
+            <p>In the early days of computing (1960s-1970s), software development was often chaotic and unpredictable. Projects regularly failed, went over budget, or delivered systems that didn't meet user needs. This period became known as the "Software Crisis."</p>
+            
+            <div class="concept-box">
+                <p><strong>Problems That Led to Structured Development:</strong></p>
+                <p>• Projects consistently delivered late and over budget</p>
+                <p>• Software was unreliable and difficult to maintain</p>
+                <p>• Systems often didn't meet user requirements</p>
+                <p>• Code was poorly documented and hard to understand</p>
+                <p>• Teams worked without clear processes or standards</p>
+            </div>
+
+            <div class="reflection-question">
+                <strong>* Reflection Question:</strong> Think about a time when you started a complex project without planning. What challenges did you face? How might proper planning have helped?
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>* Why Well-Designed Software Matters</h2>
+            <p>The goal of modern software engineering is to produce high-quality software that matches the properties of a well-designed system. These characteristics ensure that software not only works correctly but can be maintained, extended, and relied upon over time.</p>
+
+            <div class="quality-attribute">
+                <h3>* Maintainability</h3>
+                <p>This is defined as the ease of finding and correcting errors in the software. Think of maintainability like the difference between a well-organized toolbox and a messy garage. In a well-organized toolbox, every tool has its place, everything is labeled, and you can quickly find what you need. Similarly, maintainable software includes modularity, clear documentation, readable code, and structured coding techniques.</p>
+                
+                <div class="analogy-box">
+                    <strong>* The Recipe Book Analogy:</strong> A well-written recipe book has clear ingredients lists, step-by-step instructions, and helpful tips. If you need to modify a recipe (like making it vegetarian), you can easily identify which ingredients to substitute. Maintainable software is like a well-written recipe book for computers.
+                </div>
+            </div>
+
+            <div class="quality-attribute">
+                <h3>* Dependability</h3>
+                <p>Dependability means the software's capacity to display optimum behavior such as reliability, security, and safety. Dependable software should not inflict any form of physical or economic damage during normal operations or system failures. It must perform intended functions with required precision over its lifecycle and include error detection and recovery capabilities.</p>
+                
+                <div class="analogy-box">
+                    <strong>* The Bridge Analogy:</strong> A dependable bridge doesn't just hold up under normal traffic—it's designed to handle extreme weather, heavy loads, and unexpected situations. It has safety features like guardrails and warning systems. Dependable software is like a well-engineered bridge that keeps working even when things go wrong.
+                </div>
+            </div>
+
+            <div class="quality-attribute">
+                <h3>* Efficiency</h3>
+                <p>Efficiency is the extent to which software uses minimum system resources in the execution of its tasks, ensuring there is no excessive use of system resources such as memory, processing power, or network bandwidth.</p>
+                
+                <div class="analogy-box">
+                    <strong>* The Fuel Economy Analogy:</strong> An efficient car gets you from point A to point B while using the least amount of fuel. It doesn't waste energy on unnecessary features or poor design. Efficient software accomplishes its tasks while consuming minimal computer resources.
+                </div>
+            </div>
+
+            <div class="quality-attribute">
+                <h3>* Usability</h3>
+                <p>This is a measure of the overall utility of the software product, determining if it allows users to achieve specified goals with relative ease, efficiency, effectiveness, and satisfaction. An appropriate user interface and adequate documentation assist the system's usability. A measure of usability includes being easily learned, efficient to use, and having error recovery mechanisms.</p>
+                
+                <div class="analogy-box">
+                    <strong>* The Smartphone Analogy:</strong> A usable smartphone doesn't require you to read a manual to make a phone call. The interface is intuitive, icons are recognizable, and common tasks are easy to perform. Usable software feels natural and helps users accomplish their goals without frustration.
+                </div>
+            </div>
+
+            <div class="quality-attribute">
+                <h3>* Portability</h3>
+                <p>Portability is defined as the ease of transference of software to a new device and/or new operating system environment. This means the software can run on different platforms without major modifications.</p>
+                
+                <div class="analogy-box">
+                    <strong>* The Universal Adapter Analogy:</strong> A portable device charger works in different countries with various electrical outlets. You might need a simple adapter, but the core functionality remains the same. Portable software can move between different computer systems with minimal changes.
+                </div>
+            </div>
+
+            <div class="quality-attribute">
+                <h3>* Availability of Appropriate Documentation</h3>
+                <p>Properly produced and maintained system documentation is a tremendous aid to maintenance engineers. System documentation includes all documents describing the implementation of the system from the requirements specification to the final acceptance test plan.</p>
+                
+                <div class="analogy-box">
+                    <strong>* The Owner's Manual Analogy:</strong> When you buy a car, it comes with an owner's manual that explains how to operate it, maintain it, and troubleshoot problems. Good software documentation serves the same purpose—it helps users understand how to use the system and helps developers maintain and modify it.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>* Traditional SDLC Phases</h2>
+            <p>The Software Development Life Cycle provides a structured approach to building software systems. Each phase has specific activities, deliverables, and tools that ensure quality and reduce risk.</p>
+
+            <div class="phase-card">
+                <h3>* Requirements Analysis Phase</h3>
+                <p>During the analysis phase, the focus is on gathering facts and data from diverse sources to evaluate the current systems, processes, and procedures along with the project vision. The goals of this phase include conducting feasibility studies, staffing the project, defining approved requirements, and creating the System Requirements Document.</p>
+
+                <h4>Activities:</h4>
+                <div class="concept-box">
+                    <p><strong>Conduct Feasibility Study:</strong> Determine if the project is technically and economically viable</p>
+                    <p><strong>Staff the Project:</strong> Assemble the development team with appropriate skills</p>
+                    <p><strong>Define Requirements:</strong> Document what the system must do and how it should perform</p>
+                    <p><strong>Create System Requirements Document:</strong> Formal specification of system requirements</p>
+                    <p><strong>Develop Test Activities:</strong> Plan how the system will be validated</p>
+                    <p><strong>Select Best Alternative:</strong> Choose the optimal solution approach</p>
+                </div>
+
+                <h4>Deliverables:</h4>
+                <div class="concept-box">
+                    <p><strong>Concept of Operations:</strong> Describes operational scenarios of system functions</p>
+                    <p><strong>Feasibility Report:</strong> Documents project risks and viability assessment</p>
+                    <p><strong>System Requirements Document (SRD):</strong> Formal statement of functional, data, interface, and physical requirements</p>
+                    <p><strong>Requirements Traceability Matrix (RTM):</strong> Links requirements to their origins and ensures delivery</p>
+                    <p><strong>Test Master Plan (TMP):</strong> Documents testing scope, methodology, and responsibilities</p>
+                </div>
+
+                <h4>Tools & Techniques:</h4>
+                <div class="concept-box">
+                    <p><strong>Stakeholder Interviews:</strong> Direct communication with users and decision makers</p>
+                    <p><strong>Document Analysis:</strong> Review of existing systems and processes</p>
+                    <p><strong>Use Case Modeling:</strong> Scenarios describing system interactions</p>
+                    <p><strong>Prototyping:</strong> Early models to validate requirements</p>
+                    <p><strong>Requirements Management Tools:</strong> Software for tracking and managing requirements</p>
+                </div>
+
+                <div class="analogy-box">
+                    <strong>* The Detective Analogy:</strong> Requirements analysis is like being a detective investigating a case. You interview witnesses (stakeholders), gather evidence (current system data), and piece together what really happened (current state) and what needs to happen (future state). The better your investigation, the more likely you'll solve the case successfully.
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <h3>* Design Phase</h3>
+                <p>During the design phase, the system software is designed to satisfy the requirements identified in the analysis phase. The requirements identified in the requirements analysis phase are the basis for the system design. The goal is the transformation of all requirements into detailed specifications covering all aspects of the system design.</p>
+
+                <h4>Design Methods:</h4>
+                <div class="method-card">
+                    <h4>* Top Down Design</h4>
+                    <p>This design method entails developing a software solution to a problem by taking the general problem to be solved and dividing it into small more manageable sub-problems. Each objective is then further broken down and solutions developed for them.</p>
+                </div>
+                <div class="method-card">
+                    <h4>* Bottom Up Design</h4>
+                    <p>This design method entails developing a workable solution to a problem by starting from the most critical objective or most critical problem up to the general objective or problem. This method is used whenever the possible solution is too large or complicated to focus on as a whole.</p>
+                </div>
+
+                <h4>Activities:</h4>
+                <div class="concept-box">
+                    <p><strong>System Architecture Design:</strong> Define overall system structure and components</p>
+                    <p><strong>Database Design:</strong> Plan data storage, relationships, and access patterns</p>
+                    <p><strong>User Interface Design:</strong> Create mockups and navigation flows</p>
+                    <p><strong>Security Design:</strong> Plan authentication, authorization, and data protection</p>
+                    <p><strong>Integration Planning:</strong> Define how components will work together</p>
+                </div>
+
+                <h4>Deliverables:</h4>
+                <div class="concept-box">
+                    <p><strong>System Design Document:</strong> Specifies construction details, system components, and interfaces</p>
+                    <p><strong>System Architecture Design:</strong> Technical design of architecture and high/low-level designs</p>
+                    <p><strong>Integration Plan:</strong> How components will be integrated and tested</p>
+                    <p><strong>Security Document:</strong> Security requirements and implementation strategies</p>
+                    <p><strong>Interface Design:</strong> User interface specifications and navigation</p>
+                    <p><strong>Data Storage Design:</strong> How data will be stored and accessed by the system</p>
+                </div>
+
+                <h4>Tools & Techniques:</h4>
+                <div class="concept-box">
+                    <p><strong>UML Diagrams:</strong> Visual modeling of system structure and behavior</p>
+                    <p><strong>Wireframing Tools:</strong> Creating user interface mockups</p>
+                    <p><strong>Database Design Tools:</strong> Entity-relationship modeling</p>
+                    <p><strong>Architecture Patterns:</strong> Proven design structures and approaches</p>
+                    <p><strong>Design Reviews:</strong> Peer evaluation of design decisions</p>
+                </div>
+
+                <div class="analogy-box">
+                    <strong>* The Architect Analogy:</strong> System design is like architectural planning for a building. The architect takes the client's requirements (I want a 3-bedroom house with a large kitchen) and creates detailed blueprints showing exactly how to build it. Every room, electrical outlet, and pipe is planned before construction begins.
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <h3>* Implementation Phase</h3>
+                <p>This phase is where the coding of the system begins based on the documents and guidelines provided as deliverables from the planning and design phases. The system is built to meet the scope within time, cost, and quality constraints.</p>
+
+                <h4>Activities:</h4>
+                <div class="concept-box">
+                    <p><strong>Code Development:</strong> Writing program code according to design specifications</p>
+                    <p><strong>Unit Testing:</strong> Testing individual components as they are developed</p>
+                    <p><strong>Code Reviews:</strong> Peer examination of code quality and standards</p>
+                    <p><strong>Version Control:</strong> Managing code changes and collaboration</p>
+                    <p><strong>Documentation:</strong> Creating technical and user documentation</p>
+                    <p><strong>Build Management:</strong> Compiling and packaging the software</p>
+                </div>
+
+                <h4>Deliverables:</h4>
+                <div class="concept-box">
+                    <p><strong>Completed Functional System:</strong> Meets all business needs and functional requirements within constraints</p>
+                    <p><strong>Deployment to Production:</strong> System is installed and operational in live environment</p>
+                    <p><strong>Implementation Plan:</strong> Detailed plan for system deployment and rollout</p>
+                    <p><strong>Test Data:</strong> Data sets used for system validation and testing</p>
+                    <p><strong>Integration Document:</strong> Documentation of how system components work together</p>
+                    <p><strong>System Documentation:</strong> Technical, operational, and user manuals for system operation</p>
+                </div>
+
+                <h4>Tools & Techniques:</h4>
+                <div class="concept-box">
+                    <p><strong>Programming Languages:</strong> Java, Python, C#, JavaScript, etc.</p>
+                    <p><strong>Integrated Development Environments (IDEs):</strong> Visual Studio, Eclipse, IntelliJ</p>
+                    <p><strong>Version Control Systems:</strong> Git, SVN for managing code changes</p>
+                    <p><strong>Build Tools:</strong> Maven, Gradle for automated compilation</p>
+                    <p><strong>Code Quality Tools:</strong> Static analysis and code review tools</p>
+                </div>
+
+                <div class="analogy-box">
+                    <strong>* The Construction Analogy:</strong> Implementation is like the actual construction of a building. The construction crew follows the architectural blueprints exactly, using the specified materials and techniques. Quality inspectors check the work at each stage to ensure it meets the design specifications and building codes.
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <h3>* Testing Phase</h3>
+                <p>The activities in the testing phase are focused on whether the system produced is for the desired purpose and meets all requirements. During the pre-commissioning phase, all functional and non-functional requirements of the system must be checked and tested.</p>
+
+                <h4>Testing Types:</h4>
+                <div class="concept-box">
+                    <p><strong>Unit Testing:</strong> Testing individual components in isolation</p>
+                    <p><strong>Integration Testing:</strong> Testing how components work together</p>
+                    <p><strong>System Testing:</strong> Testing the complete integrated system</p>
+                    <p><strong>User Acceptance Testing:</strong> Validation that system meets business requirements</p>
+                    <p><strong>Security Testing:</strong> Ensuring system protects data and maintains functionality</p>
+                    <p><strong>Performance Testing:</strong> Verifying system meets speed and efficiency requirements</p>
+                </div>
+
+                <h4>Activities:</h4>
+                <div class="concept-box">
+                    <p><strong>Test Planning:</strong> Define testing strategy and approach</p>
+                    <p><strong>Test Case Development:</strong> Create detailed test scenarios</p>
+                    <p><strong>Test Execution:</strong> Run tests and document results</p>
+                    <p><strong>Defect Management:</strong> Track and resolve identified issues</p>
+                    <p><strong>Test Reporting:</strong> Communicate testing progress and results</p>
+                </div>
+
+                <h4>Deliverables:</h4>
+                <div class="concept-box">
+                    <p><strong>Test Plans:</strong> Detailed testing strategy and procedures</p>
+                    <p><strong>Test Cases:</strong> Specific scenarios to validate system behavior</p>
+                    <p><strong>Test Results:</strong> Documentation of test execution outcomes</p>
+                    <p><strong>Defect Reports:</strong> Issues found and their resolution status</p>
+                    <p><strong>Test Coverage Reports:</strong> Analysis of how much of the system was tested</p>
+                </div>
+
+                <h4>Tools & Techniques:</h4>
+                <div class="concept-box">
+                    <p><strong>Test Management Tools:</strong> TestRail, Jira for organizing testing</p>
+                    <p><strong>Automated Testing Tools:</strong> Selenium, JUnit for automated test execution</p>
+                    <p><strong>Performance Testing Tools:</strong> JMeter, LoadRunner for load testing</p>
+                    <p><strong>Bug Tracking Systems:</strong> Bugzilla, Jira for defect management</p>
+                    <p><strong>Code Coverage Tools:</strong> Measuring how much code is tested</p>
+                </div>
+
+                <div class="analogy-box">
+                    <strong>* The Quality Control Analogy:</strong> Testing is like quality control in a car manufacturing plant. Each component is tested individually (unit testing), then systems are tested together (integration testing), and finally the complete car is road-tested (system testing) before it's delivered to customers (user acceptance testing).
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <h3>* Maintenance Phase</h3>
+                <p>Maintenance is the longest and most expensive phase of the software lifecycle, typically consuming 60-80% of the total project cost. This phase involves modifying and updating the software after delivery to correct faults, improve performance, or adapt to changing requirements.</p>
+
+                <h4>Types of Maintenance:</h4>
+                <div class="concept-box">
+                    <p><strong>Corrective Maintenance:</strong> Fixing bugs and errors discovered after deployment</p>
+                    <p><strong>Adaptive Maintenance:</strong> Modifying software to work in new environments</p>
+                    <p><strong>Perfective Maintenance:</strong> Enhancing functionality and improving performance</p>
+                    <p><strong>Preventive Maintenance:</strong> Making changes to prevent future problems</p>
+                </div>
+
+                <h4>Activities:</h4>
+                <div class="concept-box">
+                    <p><strong>Bug Fixes:</strong> Resolving defects reported by users</p>
+                    <p><strong>Feature Enhancements:</strong> Adding new functionality based on user needs</p>
+                    <p><strong>Performance Optimization:</strong> Improving system speed and efficiency</p>
+                    <p><strong>Security Updates:</strong> Addressing security vulnerabilities</p>
+                    <p><strong>Documentation Updates:</strong> Keeping documentation current with changes</p>
+                </div>
+
+                <h4>Tools & Techniques:</h4>
+                <div class="concept-box">
+                    <p><strong>Change Management Systems:</strong> Controlling and tracking modifications</p>
+                    <p><strong>Version Control:</strong> Managing different versions of the software</p>
+                    <p><strong>Monitoring Tools:</strong> Tracking system performance and usage</p>
+                    <p><strong>Help Desk Systems:</strong> Managing user support requests</p>
+                    <p><strong>Regression Testing:</strong> Ensuring changes don't break existing functionality</p>
+                </div>
+
+                <div class="analogy-box">
+                    <strong>* The Home Ownership Analogy:</strong> Software maintenance is like owning a house. After you move in, you need ongoing maintenance—fixing leaky faucets (bug fixes), updating appliances (feature enhancements), improving insulation (performance optimization), and regular upkeep (preventive maintenance). The maintenance never really ends, but it keeps your investment valuable.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>* Real-World Case Studies</h2>
+            <p>Learning from both failures and successes helps us understand the importance of following proper SDLC practices.</p>
+
+            <div class="case-study">
+                <h3>* Case Study 1: Healthcare.gov Launch Failure (2013)</h3>
+                <p><strong>The Problem:</strong> The U.S. healthcare marketplace website crashed on launch day, preventing millions from accessing health insurance.</p>
+                
+                <p><strong>SDLC Failures:</strong></p>
+                <div class="concept-box">
+                    <p>• <strong>Requirements Analysis:</strong> Unclear requirements and changing specifications</p>
+                    <p>• <strong>Design:</strong> Poor system architecture couldn't handle expected load</p>
+                    <p>• <strong>Implementation:</strong> Multiple contractors working without proper coordination</p>
+                    <p>• <strong>Testing:</strong> Insufficient load testing and integration testing</p>
+                    <p>• <strong>Timeline:</strong> Political deadlines ignored technical realities</p>
+                </div>
+
+                <p><strong>Lessons Learned:</strong> Proper testing, realistic timelines, and clear requirements are essential for critical systems.</p>
+
+                <div class="reflection-question">
+                    <strong>* Reflection Question:</strong> How might following a structured SDLC have prevented this failure? Which phase was most critical?
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h3>* Case Study 2: NASA Mars Climate Orbiter (1999)</h3>
+                <p><strong>The Problem:</strong> A $125 million spacecraft was lost because one team used metric units while another used imperial units.</p>
+                
+                <p><strong>SDLC Failures:</strong></p>
+                <div class="concept-box">
+                    <p>• <strong>Requirements:</strong> Interface specifications weren't clearly defined</p>
+                    <p>• <strong>Design:</strong> Lack of standardization across teams</p>
+                    <p>• <strong>Implementation:</strong> No validation of unit conversions</p>
+                    <p>• <strong>Testing:</strong> Integration testing didn't catch the unit mismatch</p>
+                </div>
+
+                <p><strong>Lessons Learned:</strong> Clear specifications, standardization, and thorough integration testing are crucial.</p>
+            </div>
+
+            <div class="case-study">
+                <h3>* Case Study 3: Spotify's Success Story</h3>
+                <p><strong>The Success:</strong> Spotify revolutionized music streaming through excellent software engineering practices.</p>
+                
+                <p><strong>SDLC Strengths:</strong></p>
+                <div class="concept-box">
+                    <p>• <strong>Requirements:</strong> Continuous user research and feedback integration</p>
+                    <p>• <strong>Design:</strong> Scalable microservices architecture</p>
+                    <p>• <strong>Implementation:</strong> Small, autonomous teams with clear ownership</p>
+                    <p>• <strong>Testing:</strong> Automated testing and continuous integration</p>
+                    <p>• <strong>Maintenance:</strong> Continuous deployment and monitoring</p>
+                </div>
+
+                <p><strong>Key Takeaway:</strong> Following SDLC principles while adapting to modern practices leads to successful, scalable systems.</p>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <h2>* SDLC Knowledge Quiz</h2>
+            <div class="quiz-stats">
+                <p>Question <span id="currentQuestion">1</span> of <span id="totalQuestions">20</span></p>
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <div id="quiz">
+                <div class="question active" data-question="1">
+                    <h3>Question 1: What was the primary cause of the "Software Crisis" in the 1960s-1970s?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q1" value="a"> A) Lack of powerful computers</label>
+                        <label><input type="radio" name="q1" value="b"> B) Absence of structured development processes</label>
+                        <label><input type="radio" name="q1" value="c"> C) Too few programmers available</label>
+                        <label><input type="radio" name="q1" value="d"> D) Programming languages were too complex</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="2">
+                    <h3>Question 2: Which software quality attribute refers to the ease of finding and correcting errors?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q2" value="a"> A) Efficiency</label>
+                        <label><input type="radio" name="q2" value="b"> B) Maintainability</label>
+                        <label><input type="radio" name="q2" value="c"> C) Portability</label>
+                        <label><input type="radio" name="q2" value="d"> D) Usability</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="3">
+                    <h3>Question 3: What is the primary goal of the Requirements Analysis phase?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q3" value="a"> A) Write program code</label>
+                        <label><input type="radio" name="q3" value="b"> B) Gather and document system requirements</label>
+                        <label><input type="radio" name="q3" value="c"> C) Test the completed system</label>
+                        <label><input type="radio" name="q3" value="d"> D) Deploy to production</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="4">
+                    <h3>Question 4: Which design method starts with the general problem and breaks it into smaller sub-problems?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q4" value="a"> A) Bottom Up Design</label>
+                        <label><input type="radio" name="q4" value="b"> B) Top Down Design</label>
+                        <label><input type="radio" name="q4" value="c"> C) Spiral Design</label>
+                        <label><input type="radio" name="q4" value="d"> D) Waterfall Design</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="5">
+                    <h3>Question 5: What percentage of total project cost is typically consumed by the Maintenance phase?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q5" value="a"> A) 20-30%</label>
+                        <label><input type="radio" name="q5" value="b"> B) 40-50%</label>
+                        <label><input type="radio" name="q5" value="c"> C) 60-80%</label>
+                        <label><input type="radio" name="q5" value="d"> D) 90-95%</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="6">
+                    <h3>Question 6: Which testing type focuses on testing individual components in isolation?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q6" value="a"> A) Integration Testing</label>
+                        <label><input type="radio" name="q6" value="b"> B) System Testing</label>
+                        <label><input type="radio" name="q6" value="c"> C) Unit Testing</label>
+                        <label><input type="radio" name="q6" value="d"> D) User Acceptance Testing</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="7">
+                    <h3>Question 7: What was the main technical cause of the NASA Mars Climate Orbiter failure?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q7" value="a"> A) Software bug in navigation system</label>
+                        <label><input type="radio" name="q7" value="b"> B) Unit conversion mismatch between teams</label>
+                        <label><input type="radio" name="q7" value="c"> C) Hardware failure in communication</label>
+                        <label><input type="radio" name="q7" value="d"> D) Insufficient fuel for the mission</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="8">
+                    <h3>Question 8: Which SDLC deliverable links requirements to their origins and ensures delivery?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q8" value="a"> A) System Requirements Document (SRD)</label>
+                        <label><input type="radio" name="q8" value="b"> B) Requirements Traceability Matrix (RTM)</label>
+                        <label><input type="radio" name="q8" value="c"> C) Test Master Plan (TMP)</label>
+                        <label><input type="radio" name="q8" value="d"> D) Feasibility Report</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="9">
+                    <h3>Question 9: True or False: Dependable software should not inflict physical or economic damage during system failures.</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q9" value="a"> A) True</label>
+                        <label><input type="radio" name="q9" value="b"> B) False</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="10">
+                    <h3>Question 10: Which maintenance type involves fixing bugs and errors discovered after deployment?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q10" value="a"> A) Adaptive Maintenance</label>
+                        <label><input type="radio" name="q10" value="b"> B) Perfective Maintenance</label>
+                        <label><input type="radio" name="q10" value="c"> C) Corrective Maintenance</label>
+                        <label><input type="radio" name="q10" value="d"> D) Preventive Maintenance</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="11">
+                    <h3>Question 11: What does portability in software refer to?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q11" value="a"> A) How fast the software runs</label>
+                        <label><input type="radio" name="q11" value="b"> B) How easy it is to use</label>
+                        <label><input type="radio" name="q11" value="c"> C) How easily it can be transferred to new platforms</label>
+                        <label><input type="radio" name="q11" value="d"> D) How well it handles errors</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="12">
+                    <h3>Question 12: Which phase transforms requirements into detailed specifications?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q12" value="a"> A) Requirements Analysis</label>
+                        <label><input type="radio" name="q12" value="b"> B) Design</label>
+                        <label><input type="radio" name="q12" value="c"> C) Implementation</label>
+                        <label><input type="radio" name="q12" value="d"> D) Testing</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="13">
+                    <h3>Question 13: True or False: Bottom Up Design starts with the most critical problem and works up to the general objective.</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q13" value="a"> A) True</label>
+                        <label><input type="radio" name="q13" value="b"> B) False</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="14">
+                    <h3>Question 14: What was a major SDLC failure in the Healthcare.gov launch?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q14" value="a"> A) Excellent requirements gathering</label>
+                        <label><input type="radio" name="q14" value="b"> B) Insufficient load testing</label>
+                        <label><input type="radio" name="q14" value="c"> C) Too much time for development</label>
+                        <label><input type="radio" name="q14" value="d"> D) Perfect system architecture</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="15">
+                    <h3>Question 15: Which testing validates that the system meets business requirements?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q15" value="a"> A) Unit Testing</label>
+                        <label><input type="radio" name="q15" value="b"> B) Integration Testing</label>
+                        <label><input type="radio" name="q15" value="c"> C) System Testing</label>
+                        <label><input type="radio" name="q15" value="d"> D) User Acceptance Testing</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="16">
+                    <h3>Question 16: What is efficiency in software development?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q16" value="a"> A) How easy the software is to learn</label>
+                        <label><input type="radio" name="q16" value="b"> B) How well the software uses system resources</label>
+                        <label><input type="radio" name="q16" value="c"> C) How portable the software is</label>
+                        <label><input type="radio" name="q16" value="d"> D) How secure the software is</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="17">
+                    <h3>Question 17: True or False: The Implementation phase is where actual coding begins.</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q17" value="a"> A) True</label>
+                        <label><input type="radio" name="q17" value="b"> B) False</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="18">
+                    <h3>Question 18: Which document describes operational scenarios of system functions?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q18" value="a"> A) Feasibility Report</label>
+                        <label><input type="radio" name="q18" value="b"> B) Concept of Operations</label>
+                        <label><input type="radio" name="q18" value="c"> C) Test Master Plan</label>
+                        <label><input type="radio" name="q18" value="d"> D) System Design Document</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="19">
+                    <h3>Question 19: What contributed to Spotify's software development success?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q19" value="a"> A) Large, centralized teams</label>
+                        <label><input type="radio" name="q19" value="b"> B) Manual testing processes</label>
+                        <label><input type="radio" name="q19" value="c"> C) Small, autonomous teams with clear ownership</label>
+                        <label><input type="radio" name="q19" value="d"> D) Avoiding user feedback</label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="20">
+                    <h3>Question 20: True or False: System documentation includes all documents from requirements specification to final acceptance test plan.</h3>
+                    <div class="options">
+                        <label><input type="radio" name="q20" value="a"> A) True</label>
+                        <label><input type="radio" name="q20" value="b"> B) False</label>
+                    </div>
+                </div>
+
+                <button class="btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+                <button class="btn" id="submitBtn" onclick="submitQuiz()" style="display: none;">Submit Quiz</button>
+            </div>
+
+            <div class="quiz-results" id="quizResults">
+                <h3>Quiz Complete!</h3>
+                <div id="finalScore"></div>
+                <div id="detailedResults"></div>
+                <button class="btn" onclick="restartQuiz()">* Retake Quiz</button>
+                <button class="btn" onclick="reviewAnswers()">* Review Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 1;
+        let totalQuestions = 20;
+        let userAnswers = {};
+        let quizSubmitted = false;
+
+        const correctAnswers = {
+            q1: 'b', q2: 'b', q3: 'b', q4: 'b', q5: 'c',
+            q6: 'c', q7: 'b', q8: 'b', q9: 'a', q10: 'c',
+            q11: 'c', q12: 'b', q13: 'a', q14: 'b', q15: 'd',
+            q16: 'b', q17: 'a', q18: 'b', q19: 'c', q20: 'a'
+        };
+
+        const explanations = {
+            q1: "The Software Crisis was primarily caused by the absence of structured development processes. Projects failed because there were no systematic approaches to software development.",
+            q2: "Maintainability refers to the ease of finding and correcting errors in software, making it easier to modify and update over time.",
+            q3: "The Requirements Analysis phase focuses on gathering and documenting what the system must do and how it should perform.",
+            q4: "Top Down Design starts with the general problem and systematically breaks it down into smaller, manageable sub-problems.",
+            q5: "Maintenance typically consumes 60-80% of the total project cost, making it the most expensive phase of the software lifecycle.",
+            q6: "Unit Testing focuses on testing individual components or modules in isolation to ensure they work correctly.",
+            q7: "The Mars Climate Orbiter was lost due to a unit conversion mismatch - one team used metric units while another used imperial units.",
+            q8: "The Requirements Traceability Matrix (RTM) links requirements to their origins and ensures all requirements are delivered.",
+            q9: "True. Dependable software should not cause physical or economic damage during normal operations or system failures.",
+            q10: "Corrective Maintenance involves fixing bugs and errors that are discovered after the software has been deployed.",
+            q11: "Portability refers to how easily software can be transferred to new devices or operating system environments.",
+            q12: "The Design phase transforms requirements into detailed specifications covering all aspects of system design.",
+            q13: "True. Bottom Up Design starts with the most critical problem and works up to the general objective.",
+            q14: "Healthcare.gov suffered from insufficient load testing, among other SDLC failures, which caused the system to crash on launch.",
+            q15: "User Acceptance Testing validates that the system meets business requirements and is acceptable to end users.",
+            q16: "Efficiency refers to how well software uses system resources like memory, processing power, and network bandwidth.",
+            q17: "True. The Implementation phase is where actual coding begins based on the design specifications.",
+            q18: "The Concept of Operations describes operational scenarios of how system functions will be used.",
+            q19: "Spotify's success came from small, autonomous teams with clear ownership, enabling faster development and better quality.",
+            q20: "True. System documentation includes all documents from requirements specification to final acceptance test plan."
+        };
+
+        function updateProgress() {
+            const progress = (currentQuestionIndex / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex;
+        }
+
+        function nextQuestion() {
+            // Save current answer
+            const currentAnswer = document.querySelector(`input[name="q${currentQuestionIndex}"]:checked`);
+            if (currentAnswer) {
+                userAnswers[`q${currentQuestionIndex}`] = currentAnswer.value;
+            }
+
+            // Hide current question
+            document.querySelector(`[data-question="${currentQuestionIndex}"]`).classList.remove('active');
+            
+            // Move to next question
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex <= totalQuestions) {
+                // Show next question
+                document.querySelector(`[data-question="${currentQuestionIndex}"]`).classList.add('active');
+                updateProgress();
+                
+                // Show submit button on last question
+                if (currentQuestionIndex === totalQuestions) {
+                    document.getElementById('nextBtn').style.display = 'none';
+                    document.getElementById('submitBtn').style.display = 'inline-block';
+                }
+            }
+        }
+
+        function submitQuiz() {
+            // Save final answer
+            const finalAnswer = document.querySelector(`input[name="q${currentQuestionIndex}"]:checked`);
+            if (finalAnswer) {
+                userAnswers[`q${currentQuestionIndex}`] = finalAnswer.value;
+            }
+
+            quizSubmitted = true;
+            showResults();
+        }
+
+        function showResults() {
+            let score = 0;
+            let detailedResults = '';
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionKey = `q${i}`;
+                const userAnswer = userAnswers[questionKey];
+                const correctAnswer = correctAnswers[questionKey];
+                const isCorrect = userAnswer === correctAnswer;
+                
+                if (isCorrect) score++;
+
+                const resultClass = isCorrect ? 'correct' : 'incorrect';
+                const resultIcon = isCorrect ? '✓' : '✗';
+                
+                detailedResults += `
+                    <div class="result ${resultClass}">
+                        <strong>${resultIcon} Question ${i}:</strong> ${isCorrect ? 'Correct' : 'Incorrect'}<br>
+                        ${explanations[questionKey]}
+                    </div>
+                `;
+            }
+
+            const percentage = Math.round((score / totalQuestions) * 100);
+            let performanceMessage = '';
+            
+            if (percentage >= 90) {
+                performanceMessage = "Outstanding! You have excellent understanding of SDLC concepts.";
+            } else if (percentage >= 80) {
+                performanceMessage = "Great job! You have a solid grasp of software development principles.";
+            } else if (percentage >= 70) {
+                performanceMessage = "Good work! Review the areas you missed to strengthen your knowledge.";
+            } else if (percentage >= 60) {
+                performanceMessage = "Fair performance. Consider reviewing the material and retaking the quiz.";
+            } else {
+                performanceMessage = "Keep studying! Review the content thoroughly and try again.";
+            }
+
+            document.getElementById('finalScore').innerHTML = `
+                <h4>Your Score: ${score}/${totalQuestions} (${percentage}%)</h4>
+                <p>${performanceMessage}</p>
+            `;
+            
+            document.getElementById('detailedResults').innerHTML = detailedResults;
+            
+            // Hide quiz and show results
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('quizResults').classList.add('show');
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 1;
+            userAnswers = {};
+            quizSubmitted = false;
+            
+            // Reset all questions
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+            document.querySelector('[data-question="1"]').classList.add('active');
+            
+            // Reset all radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+            
+            // Reset buttons
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            document.getElementById('submitBtn').style.display = 'none';
+            
+            // Hide results and show quiz
+            document.getElementById('quizResults').classList.remove('show');
+            document.getElementById('quiz').style.display = 'block';
+            
+            updateProgress();
+        }
+
+        function reviewAnswers() {
+            // This function could expand the detailed results or scroll to them
+            document.getElementById('detailedResults').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize progress bar
+        updateProgress();
+    </script>
+</body>
+</html>
